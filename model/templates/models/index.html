@@ -1,0 +1,8 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css'%}">
+Click on a constituency to veiw details
+<ul>
+    {% for constituency in constituency_list %}
+        <li><a href="{% url 'model:constituency' constituency.id %}">{{constituency.name}}</a></li>
+    {% endfor %}
+</ul>
