@@ -11,5 +11,6 @@ def index(request):
 def constituency(request, constituency_id):
     constituency = get_object_or_404(Constituency, pk=constituency_id)
     projection = baseVoteshare(constituency)
-    context = {"constituency": constituency, "projection": projection}
+    pr_winner = max(projection, key=projection.get)
+    context = {"constituency": constituency, "projection": projection, "pr_winnner": pr_winner}
     return render(request, "models/constituency.html", context)
