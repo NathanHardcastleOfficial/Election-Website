@@ -15,6 +15,17 @@ class Parties(models.TextChoices):
     IND = 'Ind', 'Independent'
     OTH = 'Oth', 'Other'
 
+class Projection(models.Model):
+    detailed = models.BooleanField(default=False)
+    winner = models.CharField(max_length=4, choices=Parties.choices)
+    con = models.FloatField(blank=True, null=True)
+    lab = models.FloatField(blank=True, null=True)
+    ld = models.FloatField(blank=True, null=True)
+    ref = models.FloatField(blank=True, null=True)
+    grn = models.FloatField(blank=True, null=True)
+    snp = models.FloatField(blank=True, null=True)
+    pc = models.FloatField(blank=True, null=True)
+    min = models.FloatField(blank=True, null=True)
 
 class Constituency(models.Model):
     class Regions(models.TextChoices):
@@ -34,6 +45,27 @@ class Constituency(models.Model):
     id = models.CharField(max_length=9, primary_key=True)
     region = models.CharField(max_length=2, choices=Regions.choices, verbose_name='Region')
     winner2019 = models.CharField(max_length=4, choices=Parties.choices, verbose_name='2019 Winner')
+    age_under_25 = models.DecimalField(max_digits=4,decimal_places=1)
+    age_25_34 = models.DecimalField(max_digits=4,decimal_places=1)
+    age_35_49 = models.DecimalField(max_digits=4,decimal_places=1)
+    age_50_64 = models.DecimalField(max_digits=4,decimal_places=1)
+    age_over_65 = models.DecimalField(max_digits=4,decimal_places=1)
+    immigrant = models.DecimalField(max_digits=4,decimal_places=1)
+    white = models.DecimalField(max_digits=4,decimal_places=1)
+    religion_christian = models.DecimalField(max_digits=4,decimal_places=1)
+    religion_islam = models.DecimalField(max_digits=4,decimal_places=1)
+    religion_hindu = models.DecimalField(max_digits=4,decimal_places=1)
+    religion_other = models.DecimalField(max_digits=4,decimal_places=1)
+    base_con = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
+    base_lab = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
+    base_ld = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
+    base_ref = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
+    base_grn = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
+    base_snp = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
+    base_pc = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
+    base_min = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
+    basic_projection = models.OneToOneField(Projection, related_name='basic_projections', on_delete=models.DO_NOTHING, blank=True, null=True)
+    detailed_projection = models.OneToOneField(Projection, related_name='detailed_projections', on_delete=models.DO_NOTHING, blank=True, null=True)
 
     def __str__(self):
         return self.name

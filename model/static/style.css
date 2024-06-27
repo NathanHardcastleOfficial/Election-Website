@@ -1,0 +1,61 @@
+table, th, td {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+h3 {
+    border-radius: 50px;
+    padding: 4px 10px 4px 10px;
+    max-width: fit-content;
+}
+.constituency-list {
+    box-sizing: border-box;
+}
+.constituency-list ul {
+    column-count: 3;
+    column-gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.constituency-list li {
+    box-sizing: border-box;
+    padding: 4px 10px 4px 10px;
+}
+.constituency-list a {
+    display: block;
+    padding: 4px 10px 4px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: Black;
+}
+.constituency-list a:hover {
+    text-decoration: underline;
+}
+.Con, .con {
+    background-color: rgb(141,201,239);
+}
+.Lab, .lab {
+    background-color: rgb(244,155,178);
+}
+.LD, .ld {
+    background-color: rgb(252,210,140);
+}
+.SNP, .snp {
+    background-color: rgb(253,243,142);
+}
+.Ref, .ref {
+    background-color: rgb(138,219,231);
+}
+.Grn, .grn {
+    background-color: rgb(147,218,185);
+}
+.PC, .pc {
+    background-color: rgb(156,191,189);
+}
+.Oth, .min {
+    background-color: rgb(208,208,208);
+}
+#ProjectionChart {
+    max-width: 1000px;
+    max-height: 600px;
+}
