@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from .models import Constituency
+from .stats import baseVoteshare
 
 def index(request):
     constituency_list = Constituency.objects.order_by("name")
@@ -9,4 +10,6 @@ def index(request):
 
 def constituency(request, constituency_id):
     constituency = get_object_or_404(Constituency, pk=constituency_id)
-    return render(request, "models/constituency.html", {"constituency": constituency})
+    projection = baseVoteshare(constituency)
+    context = {"constituency": constituency, "projection": projection}
+    return render(request, "models/constituency.html", context)

@@ -2,3 +2,66 @@
 <link rel="stylesheet" href="{% static 'style.css'%}">
 <h3>{{ constituency.get_region_display }}</h3>
 <h1>{{ constituency }}</h1>
+<h3>Implied 2019 Winner: {{ constituency.get_winner2019_display }}</h3>
+Projection:
+<table>
+    {% for party, voteshare in projection.items %}
+    <tr>
+        <td>
+            {{ party }}
+        </td>
+        <td>
+            {{ voteshare|floatformat:1 }}%
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+Demographic information:
+<table>
+    <tr>
+        <td rowspan="5">Voter Age</td>
+        <td>&lt;25</td>
+        <td>{{ constituency.age_under_25 }}%</td>
+    </tr>
+    <tr>
+        <td>25-34</td>
+        <td>{{ constituency.age_25_34 }}%</td>
+    </tr>
+    <tr>
+        <td>35-49</td>
+        <td>{{ constituency.age_35_49 }}%</td>
+    </tr>
+    <tr>
+        <td>50-64</td>
+        <td>{{ constituency.age_50_64 }}%</td>
+    </tr>
+    <tr>
+        <td>65+</td>
+        <td>{{ constituency.age_over_65 }}%</td>
+    </tr>
+    <tr>
+        <td colspan="2">Non-UK Born</td>
+        <td>{{ constituency.immigrant }}%</td>
+    </tr>
+    <tr>
+        <td colspan="2">White</td>
+        <td>{{ constituency.white }}%</td>
+    </tr>
+    <tr>
+        <td rowspan="4">Religion</td>
+        <td>Christian</td>
+        <td>{{ constituency.religion_christian }}%</td>
+    </tr>
+    <tr>
+        <td>Muslim</td>
+        <td>{{ constituency.religion_islam }}%</td>
+    </tr>
+    <tr>
+        <td>Hindu</td>
+        <td>{{ constituency.religion_hindu }}%</td>
+    </tr>
+    <tr>
+        <td>Other</td>
+        <td>{{ constituency.religion_other }}%</td>
+    </tr>
+</table>

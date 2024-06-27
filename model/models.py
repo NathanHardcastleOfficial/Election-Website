@@ -45,14 +45,14 @@ class Constituency(models.Model):
     religion_islam = models.DecimalField(max_digits=4,decimal_places=1)
     religion_hindu = models.DecimalField(max_digits=4,decimal_places=1)
     religion_other = models.DecimalField(max_digits=4,decimal_places=1)
-    base_con = models.DecimalField(max_digits=4,decimal_places=3, blank=True)
-    base_lab = models.DecimalField(max_digits=4,decimal_places=3, blank=True)
-    base_ld = models.DecimalField(max_digits=4,decimal_places=3, blank=True)
-    base_ref = models.DecimalField(max_digits=4,decimal_places=3, blank=True)
-    base_grn = models.DecimalField(max_digits=4,decimal_places=3, blank=True)
-    base_snp = models.DecimalField(max_digits=4,decimal_places=3, blank=True)
-    base_pc = models.DecimalField(max_digits=4,decimal_places=3, blank=True)
-    base_min = models.DecimalField(max_digits=4,decimal_places=3, blank=True)
+    base_con = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
+    base_lab = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
+    base_ld = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
+    base_ref = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
+    base_grn = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
+    base_snp = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
+    base_pc = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
+    base_min = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
 
     def __str__(self):
         return self.name
