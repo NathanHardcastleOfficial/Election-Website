@@ -11,16 +11,18 @@ h3 {
     box-sizing: border-box;
 }
 .constituency-list ul {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    column-count: 3;
+    column-gap: 20px;
     list-style: none;
     padding: 0;
     margin: 0;
 }
 .constituency-list li {
+    box-sizing: border-box;
     padding: 4px 10px 4px 10px;
 }
 .constituency-list a {
+    display: block;
     padding: 4px 10px 4px 10px;
     border-radius: 10px;
     text-decoration: none;
@@ -29,29 +31,29 @@ h3 {
 .constituency-list a:hover {
     text-decoration: underline;
 }
-.Con {
-    background-color: #aad7f3;
+.Con, .con {
+    background-color: rgb(141,201,239);
 }
-.Lab {
-    background-color: #f6aabe;
+.Lab, .lab {
+    background-color: rgb(244,155,178);
 }
-.LD {
-    background-color: #fde1b3;
+.LD, .ld {
+    background-color: rgb(252,210,140);
 }
-.SNP {
-    background-color: #fdf38e;
+.SNP, .snp {
+    background-color: rgb(253,243,142);
 }
-.Ref {
-    background-color: #b0e7ef;
+.Ref, .ref {
+    background-color: rgb(138,219,231);
 }
-.Grn {
-    background-color: #abe2c8;
+.Grn, .grn {
+    background-color: rgb(147,218,185);
 }
-.PC {
-    background-color: #aac3c0;
+.PC, .pc {
+    background-color: rgb(156,191,189);
 }
-.Oth {
-    background-color: #dadada;
+.Oth, .min {
+    background-color: rgb(208,208,208);
 }
 #ProjectionChart {
     max-width: 1000px;

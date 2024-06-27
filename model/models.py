@@ -15,6 +15,17 @@ class Parties(models.TextChoices):
     IND = 'Ind', 'Independent'
     OTH = 'Oth', 'Other'
 
+class Projection(models.Model):
+    detailed = models.BooleanField(default=False)
+    winner = models.CharField(max_length=4, choices=Parties.choices)
+    con = models.FloatField(blank=True, null=True)
+    lab = models.FloatField(blank=True, null=True)
+    ld = models.FloatField(blank=True, null=True)
+    ref = models.FloatField(blank=True, null=True)
+    grn = models.FloatField(blank=True, null=True)
+    snp = models.FloatField(blank=True, null=True)
+    pc = models.FloatField(blank=True, null=True)
+    min = models.FloatField(blank=True, null=True)
 
 class Constituency(models.Model):
     class Regions(models.TextChoices):
@@ -53,6 +64,8 @@ class Constituency(models.Model):
     base_snp = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
     base_pc = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
     base_min = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
+    basic_projection = models.OneToOneField(Projection, related_name='basic_projections', on_delete=models.DO_NOTHING, blank=True, null=True)
+    detailed_projection = models.OneToOneField(Projection, related_name='detailed_projections', on_delete=models.DO_NOTHING, blank=True, null=True)
 
     def __str__(self):
         return self.name

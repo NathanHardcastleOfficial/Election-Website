@@ -40,3 +40,14 @@ def baseVoteshare(constituency):
     for key in values:
         values[key] = values[key]*100/total
     return values
+
+def voteshare(dict):
+    values = {}
+    total = 0
+    for party, strength in dict.items():
+        value = exp(float(strength))
+        values[party] = value
+        total += value
+    for key in values:
+        values[key] = values[key]*100/total
+    return values
