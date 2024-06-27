@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     {% load static %}
@@ -7,10 +8,10 @@
 <body>
     <h3>{{ constituency.get_region_display }}</h3>
     <h1>{{ constituency }}</h1>
-    <h3>Implied 2019 Winner: {{ constituency.get_winner2019_display }}</h3>
-    <h3>Projected Winner: {{ pr_winnner|long_party_name }}</h3>
+    <h3 class="{{constituency.winner2019}}">Implied 2019 Winner: {{ constituency.get_winner2019_display }}</h3>
+    <h3 class="{{pr_winnner}}">Projected Winner: {{ pr_winnner|long_party_name }}</h3>
     <h2>Current Projection: </h2>
-    <canvas id="ProjectionChart" width="400" height="200"></canvas>
+    <canvas id="ProjectionChart"></canvas>
     <script>
         var ctx = document.getElementById('ProjectionChart').getContext('2d')
         var electionChart = new Chart(ctx, {

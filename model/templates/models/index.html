@@ -1,8 +1,15 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'style.css'%}">
-Click on a constituency to veiw details
-<ul>
-    {% for constituency in constituency_list %}
-        <li><a href="{% url 'model:constituency' constituency.id %}">{{constituency.name}}</a></li>
-    {% endfor %}
-</ul>
+<!DOCTYPE html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+</head>
+<body>
+    Click on a constituency to veiw details
+    <div class="constituency-list">
+        <ul>
+            {% for constituency in constituency_list %}
+                <li><a href="{% url 'model:constituency' constituency.id %}" class = "{{constituency.winner2019}}">{{constituency.name}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>

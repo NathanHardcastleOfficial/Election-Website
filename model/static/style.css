@@ -2,3 +2,58 @@ table, th, td {
     border: 1px solid;
     border-collapse: collapse;
 }
+h3 {
+    border-radius: 50px;
+    padding: 4px 10px 4px 10px;
+    max-width: fit-content;
+}
+.constituency-list {
+    box-sizing: border-box;
+}
+.constituency-list ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.constituency-list li {
+    padding: 4px 10px 4px 10px;
+}
+.constituency-list a {
+    padding: 4px 10px 4px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: Black;
+}
+.constituency-list a:hover {
+    text-decoration: underline;
+}
+.Con {
+    background-color: #aad7f3;
+}
+.Lab {
+    background-color: #f6aabe;
+}
+.LD {
+    background-color: #fde1b3;
+}
+.SNP {
+    background-color: #fdf38e;
+}
+.Ref {
+    background-color: #b0e7ef;
+}
+.Grn {
+    background-color: #abe2c8;
+}
+.PC {
+    background-color: #aac3c0;
+}
+.Oth {
+    background-color: #dadada;
+}
+#ProjectionChart {
+    max-width: 1000px;
+    max-height: 600px;
+}
