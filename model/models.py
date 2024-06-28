@@ -27,6 +27,22 @@ class Projection(models.Model):
     pc = models.FloatField(blank=True, null=True)
     min = models.FloatField(blank=True, null=True)
 
+class Result(models.Model):
+    winner = models.CharField(max_length=4, choices=Parties.choices)
+    con_votes = models.IntegerField(blank=True, null=True)
+    lab_votes = models.IntegerField(blank=True, null=True)
+    ld_votes = models.IntegerField(blank=True, null=True)
+    snp_votes = models.IntegerField(blank=True, null=True)
+    grn_votes = models.IntegerField(blank=True, null=True)
+    ref_votes = models.IntegerField(blank=True, null=True)
+    pc_votes = models.IntegerField(blank=True, null=True)
+    wpb_votes = models.IntegerField(blank=True, null=True)
+    sdp_votes = models.IntegerField(blank=True, null=True)
+    ukip_votes = models.IntegerField(blank=True, null=True)
+    alba_votes = models.IntegerField(blank=True, null=True)
+    ind_votes = models.IntegerField(blank=True, null=True)
+    oth_votes = models.IntegerField(blank=True, null=True)
+
 class Constituency(models.Model):
     class Regions(models.TextChoices):
         NORTH_EAST = 'NE','North East'
@@ -66,6 +82,7 @@ class Constituency(models.Model):
     base_min = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
     basic_projection = models.OneToOneField(Projection, related_name='basic_projections', on_delete=models.DO_NOTHING, blank=True, null=True)
     detailed_projection = models.OneToOneField(Projection, related_name='detailed_projections', on_delete=models.DO_NOTHING, blank=True, null=True)
+    result = models.OneToOneField(Result, on_delete=models.DO_NOTHING, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -74,3 +91,8 @@ class Constituency(models.Model):
         ordering = ['name']
         verbose_name = 'constituency'
         verbose_name_plural = 'constituencies'
+
+class TotalSeats(models.Model):
+    party = models.CharField(max_length=4, choices=Parties.choices, unique=True)
+    declared = models.IntegerField(default = 0, blank=True, null=True)
+    projected = models.IntegerField(blank=True, null=True)

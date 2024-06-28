@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <head>
     {% load static %}
+    {% load custom_filters %}
     <link rel="stylesheet" href="{% static 'style.css'%}">
 </head>
 <body>
-    <h2>Click on a constituency to veiw details</h4>
+    <h2>Current Projection:</h2>
+    <table>
+        <tr>
+            <td>Party</td>
+            <td>Declared</td>
+            <td>Projected</td>
+        </tr>
+        {% for party in party_totals %}
+            <tr>
+                <td class="{{ party.party }}">{{ party.party|medium_party_name }}</td>
+                <td class="{{ party.party }}">{{ party.declared }}</td>
+                <td class="{{ party.party }}">{{ party.projected }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    <h2>Click on a constituency to veiw details</h2>
     <div class="constituency-list">
         <ul>
             {% for constituency in constituency_list %}

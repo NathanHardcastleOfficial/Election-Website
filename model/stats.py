@@ -1,4 +1,4 @@
-from .models import Constituency,Parties
+from .models import Constituency,Parties,TotalSeats
 from math import exp
 
 #takes in a Constituency and returns the base projected voteshare% in a dictionary.
@@ -51,3 +51,29 @@ def voteshare(dict):
     for key in values:
         values[key] = values[key]*100/total
     return values
+
+def updateTotals():
+    constuency_list = Constituency.objects.all()
+    seat_totals = TotalSeats.objects.all()
+    for party in seat_totals:
+        party.declared = 0
+        party.projected = 0
+        party.save()
+    declared_counts = {}
+    projected_counts = {}
+    for constituency in constuency_list:
+        if constituency.detailed_projection:
+            party = constituency.detailed_projection.winner
+        elif constituency.basic_projection:
+            party = constituency.basic_projection.winner
+        else:
+            party = constituency.winner2019
+        if party not in projected_counts:
+            projected_counts[party] = 0
+            declared_counts[party] = 0
+        projected_counts[party] += 1
+    for party in declared_counts:
+        party_totals, _ = TotalSeats.objects.get_or_create(party=party)
+        party_totals.declared = declared_counts[party]
+        party_totals.projected = projected_counts[party]
+        party_totals.save()
