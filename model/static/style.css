@@ -34,8 +34,7 @@ h3 {
 .grid-container {
     display: grid;
     grid-auto-flow: column;
-
-  }
+}
 .Con, .con {
     background-color: rgb(141,201,239);
 }
@@ -59,6 +58,18 @@ h3 {
 }
 .Oth, .min {
     background-color: rgb(208,208,208);
+}
+.WPB {
+    background-color: rgb(205,161,173)
+}
+.Alba {
+    background-color: rgb(150,189,226)
+}
+.UKIP {
+    background-color: rgb(197,173,201)
+}
+.SDP {
+    background-color: rgb(233,180,192)
 }
 #Seat-Table {
     font-size: 1.25em;

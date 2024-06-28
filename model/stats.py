@@ -1,4 +1,4 @@
-from .models import Constituency,Parties,TotalSeats
+from .models import Constituency,Parties,TotalSeats,Result
 from math import exp
 
 #takes in a Constituency and returns the base projected voteshare% in a dictionary.
@@ -85,3 +85,6 @@ def updateTotals():
         party_totals.declared = declared_counts[party]
         party_totals.projected = projected_counts[party]
         party_totals.save()
+
+def resultVotes():
+    return {}

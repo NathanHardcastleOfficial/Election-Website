@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Constituency
+from .models import Constituency,Result
 
 admin.site.register(Constituency)
-# Register your models here.
+admin.site.register(Result)

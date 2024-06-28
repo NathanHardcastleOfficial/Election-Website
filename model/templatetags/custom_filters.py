@@ -44,4 +44,12 @@ def party_colour(value):
         return "#02a95b"
     if value == "PC":
         return "#004A43"
+    if value == "WPB":
+        return "#780021"
+    if value == "Alba":
+        return "#005eb8"
+    if value == "UKIP":
+        return "#6d3177"
+    if value == "SDP":
+        return "#D25469"
     return "#AAAAAA"

@@ -9,7 +9,11 @@
     <h3>{{ constituency.get_region_display }}</h3>
     <h1>{{ constituency }}</h1>
     <h3 class="{{constituency.winner2019}}">Implied 2019 Winner: {{ constituency.get_winner2019_display }}</h3>
-    <h3 class="{{pr_winnner}}">Projected Winner: {{ pr_winnner|long_party_name }}</h3>
+    {% if constituency.result %}
+        <h3 class="{{pr_winnner}}">2024 Winner: {{ pr_winnner|long_party_name }}</h3>
+    {% else %}
+        <h3 class="{{pr_winnner}}">Projected Winner: {{ pr_winnner|long_party_name }}</h3>
+    {% endif %}
     <h2>Current Projection: </h2>
     <canvas id="ProjectionChart"></canvas>
     <script>
