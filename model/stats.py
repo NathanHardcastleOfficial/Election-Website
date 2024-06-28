@@ -62,16 +62,24 @@ def updateTotals():
     declared_counts = {}
     projected_counts = {}
     for constituency in constuency_list:
-        if constituency.detailed_projection:
-            party = constituency.detailed_projection.winner
-        elif constituency.basic_projection:
-            party = constituency.basic_projection.winner
+        if constituency.result:
+            party = constituency.result.winner
+            if party not in projected_counts:
+                projected_counts[party] = 0
+                declared_counts[party] = 0
+            projected_counts[party] += 1
+            declared_counts[party] += 1
         else:
-            party = constituency.winner2019
-        if party not in projected_counts:
-            projected_counts[party] = 0
-            declared_counts[party] = 0
-        projected_counts[party] += 1
+            if constituency.detailed_projection:
+                party = constituency.detailed_projection.winner
+            elif constituency.basic_projection:
+                party = constituency.basic_projection.winner
+            else:
+                party = constituency.winner2019
+            if party not in projected_counts:
+                projected_counts[party] = 0
+                declared_counts[party] = 0
+            projected_counts[party] += 1
     for party in declared_counts:
         party_totals, _ = TotalSeats.objects.get_or_create(party=party)
         party_totals.declared = declared_counts[party]

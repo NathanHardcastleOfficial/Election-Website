@@ -6,7 +6,7 @@
 </head>
 <body>
     <h2>Current Projection:</h2>
-    <table>
+    <table id="Seat-Table">
         <tr>
             <td>Party</td>
             <td>Declared</td>
@@ -15,8 +15,8 @@
         {% for party in party_totals %}
             <tr>
                 <td class="{{ party.party }}">{{ party.party|medium_party_name }}</td>
-                <td class="{{ party.party }}">{{ party.declared }}</td>
-                <td class="{{ party.party }}">{{ party.projected }}</td>
+                <td class="{{ party.party }}" style="text-align: right;">{{ party.declared }}</td>
+                <td class="{{ party.party }}" style="text-align: right;">{{ party.projected }}</td>
             </tr>
         {% endfor %}
         </table>

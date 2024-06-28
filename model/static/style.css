@@ -31,6 +31,11 @@ h3 {
 .constituency-list a:hover {
     text-decoration: underline;
 }
+.grid-container {
+    display: grid;
+    grid-auto-flow: column;
+
+  }
 .Con, .con {
     background-color: rgb(141,201,239);
 }
@@ -54,6 +59,10 @@ h3 {
 }
 .Oth, .min {
     background-color: rgb(208,208,208);
+}
+#Seat-Table {
+    font-size: 1.25em;
+    font-family: 'Calibri', sans-serif;
 }
 #ProjectionChart {
     max-width: 1000px;
