@@ -7,7 +7,8 @@ from .stats import baseVoteshare,resultVotes,projectionVoteshare
 def index(request):
     constituency_list = Constituency.objects.order_by("name")
     party_totals = TotalSeats.objects.order_by("-projected")
-    context = {"constituency_list": constituency_list, "party_totals": party_totals}
+    overall_result = {"winner": party_totals[0].party, "majority": 2*party_totals[0].projected-650}
+    context = {"constituency_list": constituency_list, "party_totals": party_totals, "overall_result": overall_result}
     return render(request, "models/index.html", context)
 
 def constituency(request, constituency_id):

@@ -55,3 +55,7 @@ def party_colour(value):
     if value == "SDP":
         return "#D25469"
     return "#AAAAAA"
+
+@register.filter
+def negate(value):
+    return -value

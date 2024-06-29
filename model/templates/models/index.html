@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{% static 'style.css'%}">
 </head>
 <body>
-    <h2>Current Projection:</h2>
+    <h2>Current Projection: {{ overall_result.winner|medium_party_name }} {% if overall_result.majority >= 0 %} Majority of {{overall_result.majority}} {% else %} {{overall_result.majority|negate}} short of a Majority {% endif %}</h2>
     <table id="Seat-Table">
         <tr>
             <td>Party</td>
@@ -20,7 +20,7 @@
             </tr>
         {% endfor %}
         </table>
-    <h2>Click on a constituency to veiw details</h2>
+    <h2>Click on a constituency to view details</h2>
     <div class="constituency-list">
         <ul>
             {% for constituency in constituency_list %}
