@@ -42,6 +42,7 @@ class Result(models.Model):
     alba_votes = models.IntegerField(blank=True, null=True)
     ind_votes = models.IntegerField(blank=True, null=True)
     oth_votes = models.IntegerField(blank=True, null=True)
+    total_votes = models.IntegerField()
 
 class Constituency(models.Model):
     class Regions(models.TextChoices):
@@ -80,9 +81,9 @@ class Constituency(models.Model):
     base_snp = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
     base_pc = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
     base_min = models.DecimalField(max_digits=4,decimal_places=3, blank=True, null=True)
-    basic_projection = models.OneToOneField(Projection, related_name='basic_projections', on_delete=models.DO_NOTHING, blank=True, null=True)
-    detailed_projection = models.OneToOneField(Projection, related_name='detailed_projections', on_delete=models.DO_NOTHING, blank=True, null=True)
-    result = models.OneToOneField(Result, on_delete=models.DO_NOTHING, blank=True, null=True)
+    basic_projection = models.OneToOneField(Projection, related_name='basic_projections', on_delete=models.SET_NULL, blank=True, null=True)
+    detailed_projection = models.OneToOneField(Projection, related_name='detailed_projections', on_delete=models.SET_NULL, blank=True, null=True)
+    result = models.OneToOneField(Result, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return self.name

@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render
+from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from .models import Constituency, TotalSeats
-from .stats import baseVoteshare
+from .stats import baseVoteshare,resultVotes,projectionVoteshare
 
 def index(request):
     constituency_list = Constituency.objects.order_by("name")
@@ -12,10 +13,17 @@ def index(request):
 def constituency(request, constituency_id):
     constituency = get_object_or_404(Constituency, pk=constituency_id)
     if constituency.result:
-        projection = {}
+        projection = resultVotes(constituency.result)
         pr_winner = constituency.result.winner
     else:
-        projection = baseVoteshare(constituency)
-        pr_winner = max(projection, key=projection.get)
+        if constituency.detailed_projection:
+            projection = projectionVoteshare(constituency.detailed_projection)
+            pr_winner = constituency.detailed_projection.winner
+        elif constituency.basic_projection:
+            projection = projectionVoteshare(constituency.basic_projection)
+            pr_winner = constituency.basic_projection.winner
+        else:
+            projection = baseVoteshare(constituency)
+            pr_winner = max(projection, key=projection.get)
     context = {"constituency": constituency, "projection": projection, "pr_winnner": pr_winner}
     return render(request, "models/constituency.html", context)

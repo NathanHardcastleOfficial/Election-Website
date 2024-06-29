@@ -24,6 +24,8 @@ def medium_party_name(value):
         return "Green"
     if value == "PC":
         return "Plaid Cymru"
+    if value == "Ind":
+        return "Independent"
     if value == "Oth":
         return "Other"
     return value

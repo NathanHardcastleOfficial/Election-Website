@@ -11,10 +11,11 @@
     <h3 class="{{constituency.winner2019}}">Implied 2019 Winner: {{ constituency.get_winner2019_display }}</h3>
     {% if constituency.result %}
         <h3 class="{{pr_winnner}}">2024 Winner: {{ pr_winnner|long_party_name }}</h3>
+        <h2>Detailed Result: </h2>
     {% else %}
         <h3 class="{{pr_winnner}}">Projected Winner: {{ pr_winnner|long_party_name }}</h3>
+        <h2>Current Projection: </h2>
     {% endif %}
-    <h2>Current Projection: </h2>
     <canvas id="ProjectionChart"></canvas>
     <script>
         var ctx = document.getElementById('ProjectionChart').getContext('2d')
@@ -35,7 +36,7 @@
                         beginAtZero: true,
                         title: {
                             display: true,
-                            text: 'Vote Share (%)'
+                            text: {% if constituency.result %}'Votes'{% else %}'Vote Share (%)'{% endif %}
                         }
                     }
                 },
@@ -115,5 +116,6 @@
             <td>{{ constituency.religion_other }}%</td>
         </tr>
     </table>
+    <!---context: {{constituency}},{{projection}},{{pr_winnner}}--->
 </body>
 

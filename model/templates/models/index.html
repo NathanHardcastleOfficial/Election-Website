@@ -27,7 +27,7 @@
                 <li>
                     <a href="{% url 'model:constituency' constituency.id %}" class = "
                         {% if constituency.result %} 
-                            {{ constituency.result.winner }}
+                            {{ constituency.result.winner }}Won
                         {% elif constituency.detailed_projection %} 
                             {{ constituency.detailed_projection.winner }}
                         {% elif constituency.basic_projection %}

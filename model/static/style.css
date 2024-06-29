@@ -71,6 +71,53 @@ h3 {
 .SDP {
     background-color: rgb(233,180,192)
 }
+.ConWon {
+    background-color: #0087dc;
+    color: white !important;
+}
+.LabWon {
+    background-color: #e4003b;
+    color: white !important;
+}
+.LDWon {
+    background-color: #faa61a;
+}
+.SNPWon {
+    background-color: rgb(249,217,0);
+}
+.RefWon {
+    background-color: #12b6cf;
+}
+.GrnWon {
+    background-color: #02a95b;
+    color: white !important;
+}
+.PCWon {
+    background-color: #004A43;
+    color: white !important;
+}
+.OthWon {
+    background-color: rgb(170,170,170);
+}
+.WPBWon {
+    background-color: #780021;
+    color: white !important;
+}
+.AlbaWon {
+    background-color: #005eb8;
+    color: white !important;
+}
+.UKIPWon {
+    background-color: #6d3177;
+    color: white !important;
+}
+.SDPWon {
+    background-color: #CF5874;
+    color: white !important;
+}
+.IndWon {
+    background-color: rgb(238,157,203);
+}
 #Seat-Table {
     font-size: 1.25em;
     font-family: 'Calibri', sans-serif;
