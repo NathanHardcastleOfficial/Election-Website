@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-*jtx7*t_pc23l(%&*w1t_2t+jiqglxga^%ajt(py@2l-=7yumq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['electionmodel.fly.dev', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'electionmodel.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'data/db.sqlite3',
     }
 }
 

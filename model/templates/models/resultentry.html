@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+    {% load static %}
+    {% load custom_filters %}
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+</head>
+<body>
+    <h1>Submit Election Result</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button><button type="reset">Reset</button>
+    </form>
+    <script>
+        $(document).ready(function() {
+            $('.constituency-dropdown').select2({
+                placeholder: 'Select a constituency',
+                allowClear: true
+            });
+        });
+    </script>
+</body>

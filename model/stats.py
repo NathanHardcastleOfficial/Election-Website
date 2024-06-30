@@ -139,8 +139,11 @@ def doBasicProjection():
         if  (result.result.pc_votes != None) and (result.base_pc != None):
             deltas["PC"] += log(result.result.pc_votes/result.result.total_votes)+log(7)-float(result.base_pc)
             counts["PC"] += 1
+    for party, count in counts.items():
+        if count < 10:
+            counts[party] = counts[party]/2 + 5
     deltas = {k: v/counts[k] for k,v in deltas.items()}
-    print(deltas)
+    #print(deltas)
     constituencies = Constituency.objects.all()
     for constituency in constituencies:
         strengths = {}
