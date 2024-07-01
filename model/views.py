@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import get_object_or_404, render
 from django.core.management import call_command
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
@@ -47,9 +48,11 @@ class ResultForm(forms.Form):
     ind_votes = forms.IntegerField(label='Independent Votes', min_value=0, required=False)
     oth_votes = forms.IntegerField(label='Other Party Votes', min_value=0, required=False)
 
+def check_admin(user):
+   return user.is_superuser
+
+@user_passes_test(check_admin)
 def addResults(request):
-    if not request.user.is_superuser:
-        return HttpResponseForbidden()
     if request.method == "POST":
         form = ResultForm(request.POST)
         if form.is_valid():

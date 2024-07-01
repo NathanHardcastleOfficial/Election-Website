@@ -5,6 +5,8 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /app
 
+RUN mkdir data
+
 COPY requirements.txt /app/
 RUN apt-get update && apt-get install -y apache2-dev
 RUN apt-get update && apt-get install -y sqlite3 libsqlite3-dev
@@ -13,11 +15,11 @@ RUN pip install -r requirements.txt
 
 COPY . /app/
 
+VOLUME /app/data
+
 RUN python manage.py makemigrations
 RUN python manage.py migrate
 RUN python manage.py collectstatic --noinput
-RUN sqlite3 --version
-RUN python manage.py import_constituency_data data.csv
 
 EXPOSE 8080
 

@@ -21,4 +21,4 @@ primary_region = 'lhr'
 
 [mounts]
   source = "electionmodeldata"
-  destination = "/data"
+  destination = "/app/data"
