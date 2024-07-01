@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
 from model.models import Result
+from model.stats import updateTotals
 
 class Command(BaseCommand):
 
@@ -8,6 +9,7 @@ class Command(BaseCommand):
         if confirmation.lower() in ('yes','y'):
             results = Result.objects.all()
             count, _ = results.delete()
+            updateTotals()
             self.stdout.write(self.style.SUCCESS(f'Successfully deleted {str(count)} results'))
         else:
             self.stdout.write(self.style.WARNING('Operation cancelled. No results were deleted.'))

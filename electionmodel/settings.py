@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-*jtx7*t_pc23l(%&*w1t_2t+jiqglxga^%ajt(py@2l-=7yumq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['electionmodel.fly.dev', 'localhost', '127.0.0.1']
 
