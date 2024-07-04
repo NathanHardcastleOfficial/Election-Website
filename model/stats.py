@@ -197,6 +197,13 @@ def doDetailedProjection():
         data = [_resultToDict(result) for result in results]
         df = pd.DataFrame(data)
         condf = df.dropna(subset=['con_delta'])
+        con = False
+        lab = False
+        ld = False
+        ref = False
+        grn = False
+        snp = False
+        pc = False
         if len(condf.columns) > 20:
             con = True
             conX = imputer.fit_transform(condf.drop(columns=[col for col in columns_to_drop if col in condf.columns]))
@@ -231,14 +238,20 @@ def doDetailedProjection():
             grnY = condf['grn_delta']
             grnModel = LinearRegression()
             grnModel.fit(grnX,grnY)
-        snpdf = df.dropna(subset=['snp_delta'])
+        if 'snp_delta' in df.columns:
+            snpdf = df.dropna(subset=['snp_delta'])
+        else:
+            snpdf = pd.DataFrame([])
         if len(snpdf.columns) > 20:
             snp = True
             snpX = imputer.fit_transform(snpdf.drop(columns=[col for col in columns_to_drop if col in snpdf.columns]))
             snpY = condf['snp_delta']
             snpModel = LinearRegression()
             snpModel.fit(snpX,snpY)
-        pcdf = df.dropna(subset=['pc_delta'])
+        if 'pc_delta' in df.columns:
+            pcdf = df.dropna(subset=['pc_delta'])
+        else:
+            pcdf = pd.DataFrame([])
         if len(pcdf.columns) > 20:
             pc = True
             pcX = imputer.fit_transform(pcdf.drop(columns=[col for col in columns_to_drop if col in pcdf.columns]))
@@ -251,49 +264,49 @@ def doDetailedProjection():
             if constituency.base_con != None:
                 if con:
                     strengths["con"] = float(constituency.base_con)+conModel([constituency.age_under_25,constituency.age_25_34,constituency.age_35_49,constituency.age_50_64,constituency.age_over_65,constituency.immigrant,constituency.white,constituency.religion_christian,constituency.religion_islam,constituency.religion_hindu,constituency.religion_other])
-                elif condf.columns > 0:
+                elif len(condf.columns) > 0:
                     strengths["con"] = float(constituency.base_con)+condf.loc[:,"con_delta"].mean()
                 else:
                     strengths["con"] = float(constituency.base_con)
             if constituency.base_lab != None:
                 if lab:
                     strengths["lab"] = float(constituency.base_lab)+labModel([constituency.age_under_25,constituency.age_25_34,constituency.age_35_49,constituency.age_50_64,constituency.age_over_65,constituency.immigrant,constituency.white,constituency.religion_christian,constituency.religion_islam,constituency.religion_hindu,constituency.religion_other])
-                elif labdf.columns > 0:
+                elif len(labdf.columns) > 0:
                     strengths["lab"] = float(constituency.base_lab)+labdf.loc[:,"lab_delta"].mean()
                 else:
                     strengths["lab"] = float(constituency.base_lab)
             if constituency.base_ld != None:
                 if ld:
                     strengths["ld"] = float(constituency.base_ld)+ldModel([constituency.age_under_25,constituency.age_25_34,constituency.age_35_49,constituency.age_50_64,constituency.age_over_65,constituency.immigrant,constituency.white,constituency.religion_christian,constituency.religion_islam,constituency.religion_hindu,constituency.religion_other])
-                elif condf.columns > 0:
+                elif len(lddf.columns) > 0:
                     strengths["ld"] = float(constituency.base_ld)+lddf.loc[:,"ld_delta"].mean()
                 else:
                     strengths["ld"] = float(constituency.base_ld)
             if constituency.base_ref != None:
                 if ref:
                     strengths["ref"] = float(constituency.base_ref)+refModel([constituency.age_under_25,constituency.age_25_34,constituency.age_35_49,constituency.age_50_64,constituency.age_over_65,constituency.immigrant,constituency.white,constituency.religion_christian,constituency.religion_islam,constituency.religion_hindu,constituency.religion_other])
-                elif refdf.columns > 0:
+                elif len(refdf.columns) > 0:
                     strengths["ref"] = float(constituency.base_ref)+refdf.loc[:,"ref_delta"].mean()
                 else:
                     strengths["ref"] = float(constituency.base_ref)
             if constituency.base_grn != None:
                 if grn:
                     strengths["grn"] = float(constituency.base_grn)+grnModel([constituency.age_under_25,constituency.age_25_34,constituency.age_35_49,constituency.age_50_64,constituency.age_over_65,constituency.immigrant,constituency.white,constituency.religion_christian,constituency.religion_islam,constituency.religion_hindu,constituency.religion_other])
-                elif grndf.columns > 0:
+                elif len(grndf.columns) > 0:
                     strengths["grn"] = float(constituency.base_grn)+grndf.loc[:,"grn_delta"].mean()
                 else:
                     strengths["grn"] = float(constituency.base_grn)
             if constituency.base_snp != None:
                 if snp:
                     strengths["snp"] = float(constituency.base_snp)+snpModel([constituency.age_under_25,constituency.age_25_34,constituency.age_35_49,constituency.age_50_64,constituency.age_over_65,constituency.immigrant,constituency.white,constituency.religion_christian,constituency.religion_islam,constituency.religion_hindu,constituency.religion_other])
-                elif snpdf.columns > 0:
+                elif len(snpdf.columns) > 0:
                     strengths["snp"] = float(constituency.base_snp)+snpdf.loc[:,"snp_delta"].mean()
                 else:
                     strengths["snp"] = float(constituency.base_snp)
             if constituency.base_pc != None:
                 if pc:
                     strengths["pc"] = float(constituency.base_pc)+pcModel([constituency.age_under_25,constituency.age_25_34,constituency.age_35_49,constituency.age_50_64,constituency.age_over_65,constituency.immigrant,constituency.white,constituency.religion_christian,constituency.religion_islam,constituency.religion_hindu,constituency.religion_other])
-                elif pcdf.columns > 0:
+                elif len(pcdf.columns) > 0:
                     strengths["pc"] = float(constituency.base_pc)+pcdf.loc[:,"pc_delta"].mean()
                 else:
                     strengths["pc"] = float(constituency.base_pc)
