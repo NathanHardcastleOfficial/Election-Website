@@ -2,3 +2,5 @@ django==4.2.11
 gunicorn
 mod_wsgi
 whitenoise
+pandas
+scikit-learn

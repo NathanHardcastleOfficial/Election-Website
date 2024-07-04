@@ -9,7 +9,8 @@ RUN mkdir data
 
 COPY requirements.txt /app/
 RUN apt-get update && apt-get install -y apache2-dev
-RUN apt-get update && apt-get install -y sqlite3 libsqlite3-dev
+RUN apt-get install -y sqlite3 libsqlite3-dev
+RUN apt-get install nano -y
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 

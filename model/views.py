@@ -3,9 +3,10 @@ from django.shortcuts import get_object_or_404, render
 from django.core.management import call_command
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.urls import reverse
+from django.conf import settings
 from django import forms
 from .models import Constituency, TotalSeats, Result
-from .stats import baseVoteshare,resultVotes,projectionVoteshare,doBasicProjection
+from .stats import baseVoteshare,resultVotes,projectionVoteshare,doBasicProjection, doDetailedProjection
 
 def index(request):
     constituency_list = Constituency.objects.order_by("name")
@@ -20,7 +21,7 @@ def constituency(request, constituency_id):
         projection = resultVotes(constituency.result)
         pr_winner = constituency.result.winner
     else:
-        if constituency.detailed_projection:
+        if (constituency.detailed_projection) and settings.USE_DETAIL:
             projection = projectionVoteshare(constituency.detailed_projection)
             pr_winner = constituency.detailed_projection.winner
         elif constituency.basic_projection:
@@ -66,7 +67,10 @@ def addResults(request):
             new_result.save()
             constituency.result = new_result
             constituency.save()
-            doBasicProjection()
+            if (Constituency.objects.exclude(result__isnull=True).count() > 29) and settings.USE_DETAIL :
+                doDetailedProjection()
+            else:
+                doBasicProjection()
             call_command("clean_projections")
             return HttpResponseRedirect(reverse("model:main"))
     else:
